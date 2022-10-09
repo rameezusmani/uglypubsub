@@ -12,7 +12,7 @@ Nothing is persisted on the disk, it is only an in-memory system.<br />
 
 ## Starting server
 ```
-const PubSubServer = require("./lib/UglyPubSubServer").PubSubServer;<br />
+const PubSubServer = require("./lib/UglyPubSubServer").PubSubServer;
 let server = new PubSubServer(8081);
 ```
 ## Closing server
@@ -22,29 +22,29 @@ server.close();
 
 ## Subscribing to a channel
 ```
-const WebSocket = require("ws").WebSocket;<br />
-const client = new WebSocket('ws://localhost:8081/');<br />
-client.on('open',()=>{<br />
-    console.log("opened");<br />
-    //channel name can only contain small letters (a-z) and digits (0-9)<br />
-    client.send(JSON.stringify({requestId: reqId,type:"subscribe",channel:"testchannel"}));<br />
+const WebSocket = require("ws").WebSocket;
+const client = new WebSocket('ws://localhost:8081/');
+client.on('open',()=>{
+    console.log("opened");
+    //channel name can only contain small letters (a-z) and digits (0-9)
+    client.send(JSON.stringify({requestId: reqId,type:"subscribe",channel:"testchannel"}));
 });
 ```
 
 ## Receiving a published message
 ```
-client.on('message',(data)=>{<br />
-    console.log(JSON.parse(data));<br />
+client.on('message',(data)=>{
+    console.log(JSON.parse(data));
 });
 ```
 
 ## Publishing a message on a channel
 ```
-const WebSocket = require("ws").WebSocket;<br />
-const client = new WebSocket('ws://localhost:8081/');<br />
-client.on('open',()=>{<br />
-    console.log("opened");<br />
-    //channel name can only contain small letters (a-z) and digits (0-9)<br />
-    client.send(JSON.stringify({requestId: "uniqueRequestId",type:"publish",channel:"testchannel",data:{mymessage:"Hello world this is my first published message"}}));<br />
+const WebSocket = require("ws").WebSocket;
+const client = new WebSocket('ws://localhost:8081/');
+client.on('open',()=>{
+    console.log("opened");
+    //channel name can only contain small letters (a-z) and digits (0-9)
+    client.send(JSON.stringify({requestId: "uniqueRequestId",type:"publish",channel:"testchannel",data:{mymessage:"Hello world this is my first published message"}}));
 });
 ```
